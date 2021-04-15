@@ -257,6 +257,214 @@ def Coach_Queries(username):
 		feedbacks = cursor.fetchall()
 		feedbacks = pd.DataFrame(feedbacks, columns=["First Name", "Last Name", "Gender", "Phone_Number", "Email", "Address", "Feedback"])
 		st.dataframe(feedbacks)
+		
+def user_queries(username):
+    cursor.execute("SELECT * FROM user_db WHERE username= %s", (username,))
+    profile_created = cursor.fetchall()
+    if(profile_created):
+        queries = ["View Profile", "Update Profile", "Add An Event", "Choose An Event", "Place An order",
+               "Take College Inventory", "Borrow From Peers","Hire Coach"]
+    else:
+        queries = ["Update Profile","View Profile", "Add An Event", "Choose An Event", "Place An order",
+               "Take College Inventory", "Borrow From Peers","Hire Coach"]
+    query = st.selectbox('QUERY', queries)
+
+    if(query == "Update Profile"):
+        st.subheader(query)
+        first_name = st.text_input("First Name",max_chars=255)
+        last_name = st.text_input("last Name",max_chars=255)
+        email = st.text_input("Email",max_chars=255)
+        phone_number = st.text_input("Phone Number",max_chars=15)
+        dob = st.text_input('Date of Birth - format(YY_MM_DD)',max_chars=255)
+        gender = st.text_input("Gender",max_chars=255)
+        date_of_joining = st.text_input("Date of Joining - format(YY_MM_DD)",max_chars=255)
+        address = st.text_input("Address",max_chars=255)
+
+        if(st.button("Update")):
+            if not profile_created:
+                cursor.execute(
+                    'INSERT INTO user_db (username, First_name, Last_name, Email, Phone_Number, Date_of_Birth,Gender,Date_of_Joining,Address) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (username, first_name,last_name,email,phone_number,dob,gender,date_of_joining,address))
+                db.commit()
+                st.success("You have successfully created a valid Account")
+                profile_created = True
+            else:
+                cursor.execute(
+                    'UPDATE user_db SET First_name = %s, Last_name = %s, Email = %s, Phone_Number = %s, Date_of_Birth = %s, Gender = %s, Date_of_Joining = %s, Address = %s WHERE Username = %s',
+                    (first_name,last_name,email,phone_number,dob,gender,date_of_joining,address))
+                db.commit()
+                st.success("You have successfully updated your account")
+
+    if (query == "View Profile"):
+        st.subheader(query)
+        cursor.execute("SELECT * FROM user_db WHERE username= %s", (username,))
+        profile = cursor.fetchall()
+        st.text("User ID: {}".format(profile[0][0]))
+        st.text("First Name: {}".format(profile[0][1]))
+        st.text("Last Name: {}".format(profile[0][2]))
+        st.text("Email: {}".format(profile[0][3]))
+        st.text("Phone Number: {}".format(profile[0][4]))
+        st.text("Date of Birth: {}".format(profile[0][5]))
+        st.text("Gender: {}".format(profile[0][6]))
+        st.text("Date of Joining: {}".format(profile[0][7]))
+        st.text("Address: {}".format(profile[0][8]))
+
+    def check_venue_availability(start_datetime, end_datetime, venue_id):
+        query_input = (venue_id, start_datetime, start_datetime, end_datetime, end_datetime, start_datetime, end_datetime,)
+        cursor.execute(
+            "SELECT COUNT(*) FROM (SELECT * FROM venuebooking_db WHERE Venue_ID = %s AND ( (%s >= Start_DateTime AND %s <= End_DateTime) OR (%s >= Start_DateTime AND %s <= End_DateTime) OR (%s <= Start_DateTime AND %s >= End_DateTime))) as A;",
+            query_input)
+        l = cursor.fetchall()
+        cnt = l[0][0]
+        if (cnt == 0):
+            return True
+        else:
+            return False
+
+    if(query == "Add An Event"):
+        start_datetime = st.text_input("Start Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)",max_chars=255)
+        end_datetime = st.text_input("End Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)",max_chars=255)
+
+        event_name = st.text_input("Event Name", max_chars=255)
+        participant_limit = st.text_input("Participation Limit", max_chars=255)
+
+
+        # show all venue available.
+        cursor.execute("SELECT Venue_ID,Venue_Name,Sport_ID from venue_db")
+        temp = cursor.fetchall()
+        temp = pd.DataFrame(temp,columns=["Venue_ID","Venue_Name","Sport_ID"])
+        st.dataframe(temp)
+        venue_id = st.multiselect("Select rows: ",temp.Venue_ID)
+
+        if(st.button("NEXT1")):
+            venue_id = str(venue_id[0])
+            if(not check_venue_availability(start_datetime,end_datetime,venue_id)):
+               st.success("Sorry Venue not available in the given time slot")
+            else:
+                with st.spinner("TAKING DATA"):
+                    cursor.execute("SELECT Sport_ID FROM venue_db WHERE Venue_ID = %s", (venue_id,))
+                    sports_id = cursor.fetchall()[0][0]
+
+                    cursor.execute("SElECT user_id FROM user_db WHERE username = %s;",(username,))
+                    temp = cursor.fetchall()
+                    user_id = temp[0][0]
+
+                    query_booking = "INSERT INTO events_db (Event_Name,Start_Datetime,End_Datetime,Participant_Limit,Organizer_ID,Venue_ID,Sport_ID) VALUES (%s,%s,%s,%s,%s,%s,%s);"
+                    query_data = (event_name, start_datetime, end_datetime, participant_limit, user_id, venue_id, sports_id,)
+                    cursor.execute(query_booking, query_data)
+                    db.commit()
+                    cursor.execute("INSERT INTO participation_db VALUES (%s, %s);", (user_id,cursor.lastrowid))
+                    db.commit()
+                    cursor.execute("INSERT INTO venuebooking_db VALUES (%s, %s, %s);", (venue_id, start_datetime, end_datetime))
+                    db.commit()
+                    st.success("VENUE BOOKED SUCCESSFULLY")
+
+    def check_college_equipment_availability(college_equipment_id, issue_datetime, return_datetime):
+        query_input = (
+        college_equipment_id, issue_datetime, issue_datetime, return_datetime, return_datetime, issue_datetime,
+        return_datetime)
+        cursor.execute(
+            "SELECT COUNT(*) FROM (SELECT * FROM issueequip_db WHERE Equipment_ID = %s AND ( (%s >= Issue_Date_Time AND %s <= Return_Date_Time) OR (%s >= Issue_Date_Time AND %s <= Return_Date_Time) OR (%s <= Issue_Date_Time AND %s >= Return_Date_Time))) as A;",
+            query_input)
+        l = cursor.fetchall()
+        cnt = l[0][0]
+        if (cnt == 0):
+            return True
+        else:
+            return False
+
+    if(query == 'Take College Inventory'):
+        issue_datetime = st.text_input("Issue Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)",max_chars=255)
+        return_datetime = st.text_input("Datetime Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)",max_chars=255)
+
+        cursor.execute("SELECT Equipment_ID,Name FROM collegeequip_db")
+        temp = cursor.fetchall()
+        temp = pd.DataFrame(temp,columns=['Equipment_ID','Name'])
+        st.dataframe(temp)
+        college_equipment_id = st.multiselect("Select rows: ",temp.Equipment_ID)
+
+        if(st.button('NEXT')):
+            college_equipment_id = str(college_equipment_id[0])
+            equipment_available = check_college_equipment_availability(college_equipment_id, issue_datetime,
+                                                                       return_datetime)
+            if(not equipment_available):
+                st.success("Sorry Equipment not available in the given time slot")
+            else:
+
+                cursor.execute("SElECT user_id FROM user_db WHERE username = %s;", (username,))
+                temp = cursor.fetchall()
+                user_id = temp[0][0]
+
+                issue_query = "INSERT INTO issueequip_db VALUES (%s, %s, %s, %s);"
+                query_data = (user_id, college_equipment_id, issue_datetime, return_datetime)
+                cursor.execute(issue_query, query_data)
+                db.commit()
+                st.success("EQUIPMENT ISSUED SUCCESFULLY")
+
+    def check_user_equipment_availability(user_equipment_id, issue_datetime, return_datetime):
+        query_input = (
+        user_equipment_id, issue_datetime, issue_datetime, return_datetime, return_datetime, issue_datetime,
+        return_datetime)
+        cursor.execute(
+            "SELECT COUNT(*) FROM (SELECT * FROM borrow_db WHERE Equipment_ID = %s AND ( (%s >= Issue_Date_Time AND %s <= Return_Date_Time) OR (%s >= Issue_Date_Time AND %s <= Return_Date_Time) OR (%s <= Issue_Date_Time AND %s >= Return_Date_Time))) as A;",
+            query_input)
+        l = cursor.fetchall()
+        cnt = l[0][0]
+        if (cnt == 0):
+            return True
+        else:
+            return False
+
+    if(query == 'Borrow From Peers'):
+        issue_datetime = st.text_input("Issue Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)", max_chars=255)
+        return_datetime = st.text_input("Datetime Datetime - format(YYYY-MM-DD 'space' HH:MM:SS)", max_chars=255)
+        pickup_address = st.text_input('Pickup Address',max_chars=255)
+
+        cursor.execute("SELECT Equipment_ID,Name FROM userequip_db")
+        temp = cursor.fetchall()
+        temp = pd.DataFrame(temp, columns=['Equipment_ID', 'Name'])
+        st.dataframe(temp)
+        user_equipment_id = st.multiselect("Select rows: ", temp.Equipment_ID)
+
+
+        if(st.button('NEXT')):
+            user_equipment_id = str(user_equipment_id[0])
+            equipment_available = check_user_equipment_availability(user_equipment_id, issue_datetime, return_datetime)
+            if(not equipment_available):
+                st.success("EQUIPMENT NOT available in the entered time slot")
+            else:
+                cursor.execute("SElECT user_id FROM user_db WHERE username = %s;", (username,))
+                temp = cursor.fetchall()
+                user_id = temp[0][0]
+
+                borrow_query = "INSERT INTO borrow_db VALUES (%s, %s, %s, %s, %s);"
+                query_data = (user_id, user_equipment_id, issue_datetime, return_datetime, pickup_address)
+                cursor.execute(borrow_query, query_data)
+                db.commit()
+                st.success("EQUIPMENT BORROWED SUCCESFULLY")
+
+    if(query == 'Hire Coach'):
+        start_date = st.text_input("Start Date - format(YYYY-MM-DD)",max_chars=255)
+
+        cursor.execute('SELECT Coach_ID,First_name,Last_name,Gender From coach_db')
+        temp = cursor.fetchall()
+        temp = pd.DataFrame(temp,columns=['Coach_ID','First_name','Last_name','Gender'])
+        st.dataframe(temp)
+
+        coach_id = st.multiselect('Select Row - ',temp.Coach_ID)
+
+        if(st.button("NEXT")):
+            coach_id = str(coach_id[0])
+
+            cursor.execute("SElECT user_id FROM user_db WHERE username = %s;", (username,))
+            temp = cursor.fetchall()
+            user_id = temp[0][0]
+
+            hire_query = "INSERT INTO trains_db VALUES (%s, %s, %s);"
+            query_data = (coach_id, user_id,start_date)
+            cursor.execute(hire_query, query_data)
+            db.commit()
+            st.success("COACH HIRED SUCCESSFULLY")
 
 def main():
 	st.markdown(title_temp.format("Sportify"),unsafe_allow_html=True)
