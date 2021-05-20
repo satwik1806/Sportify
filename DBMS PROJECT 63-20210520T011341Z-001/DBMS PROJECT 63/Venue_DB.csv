@@ -1,0 +1,21 @@
+Venue_ID,Venue_Name,Venue_Type,Opening_Time,Closing_Time,Location,Sport_ID
+1,Badminton Court,Outdoor,00:00:01,23:59:59,Inside Sports Complex,1
+2,Volleyball Court,Outdoor,00:00:01,23:59:59,In Ground,11
+3,Tennis Court,Outdoor,00:00:01,23:59:59,Inside Sports Complex,2
+4,Foosball Table,Indoor,00:00:01,23:59:59,Boys Common Room,9
+5,Squash Court,Outdoor,00:00:01,23:59:59,Inside Sports Complex,5
+6,Swimming Pool,Indoor,00:00:01,23:59:59,Inside Sports Complex,6
+7,Field,Outdoor,00:00:01,23:59:59,Inside Ground,8
+8,Cricket Pitch,Outdoor,00:00:01,23:59:59,Inside Ground,7
+9,Chess club,Indoor,00:00:01,23:59:59,Club Room,10
+10,Library,Indoor,00:00:01,23:59:59,Near Old Academics Building,10
+11,Billiards Table,Indoor,00:00:01,23:59:59,Inside Sports Complex,12
+12,Basketball Court,Outdoor,00:00:01,23:59:59,Near Ground,3
+13,Basketball Court,Outdoor,00:00:01,23:59:59,Near Ground,3
+14,Badminton Court,Indoor,00:00:01,23:59:59,Near Girls Hostel,1
+15,Volleyball Court,Outdoor,00:00:01,23:59:59,Near Ground,11
+16,Tennis Court,Outdoor,00:00:01,23:59:59,Near Basketball Court,2
+17,Table Tennis Table,Indoor,00:00:01,23:59:59,3 Kensington Terrace,4
+18,Squash Court,Indoor,00:00:01,23:59:59,Inside Sports Complex,5
+19,Foosball Table,Indoor,00:00:01,23:59:59,Inside Sports Complex,9
+20,Cricket Pitch,Outdoor,00:00:01,23:59:59,Inside Ground,7

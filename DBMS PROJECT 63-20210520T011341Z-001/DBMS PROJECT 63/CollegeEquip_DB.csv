@@ -1,0 +1,41 @@
+Equipment_ID,Name,Ongoing_Repair,Condition,Manufacturer,Owner_Admin_ID
+1,Goggles,0,Poor,Dasya,19
+2,Bathing caps,1,Good,Florinda,8
+3,Flotation devices,0,Average,Margaretha,8
+4,Kickboards,0,Poor,Florenza,19
+5,Bathing caps,0,Good,Tandie,19
+6,Flotation devices,0,Good,Fleurette,19
+7,Kickboards,1,Average,Boyce,8
+8,Badminton Racquet,0,Good,Winnie,13
+9,Shuttlecock,0,Good,Winnie,18
+10,Shuttlecock,0,Average,Chase,18
+11,Badminton Shoes,0,Good,Wilfred,13
+12,Badminton Net,1,Poor,Stevana,13
+13,Tennis Racquet,0,Average,Elbertina,6
+14,Tennis Ball,0,Good,Garfield,6
+15,Keeper/Batsman Pads,0,Average,Dewitt,2
+16,Helmet,0,Poor,Gabriello,5
+17,Stumps,0,Average,Cele,2
+18,Bails,1,Good,Dede,2
+19,Football,0,Good,Wilfred,10
+20,Shin Guards,0,Good,Florenza,10
+21,Badminton Racquet,0,Good,Tandie,13
+22,Shuttlecock,0,Good,Fleurette,13
+23,Badminton Shoes,1,Good,Boyce,18
+24,Badminton Net,0,Good,Winnie,18
+25,Tennis Racquet,0,Good,Chase,6
+26,Tennis Ball,0,Good,Wilfred,6
+27,Basketball,0,Good,Stevana,4
+28,Squash Racquet,0,Poor,Elbertina,16
+29,Squash Ball,0,Average,Garfield,16
+30,Bails,1,Poor,Dewitt,15
+31,Football,1,Poor,Gabriello,10
+32,Shin Guards,0,Good,Cele,10
+33,Badminton Racquet,0,Average,Dede,13
+34,Shuttlecock,0,Poor,Dasya,18
+35,Badminton Shoes,0,Average,Florinda,13
+36,Badminton Net,0,Good,Margaretha,13
+37,Tennis Racquet,0,Poor,Cindra,6
+38,Tennis Ball,0,Poor,Marcelle,6
+39,Basketball,0,Poor,Tandie,11
+40,Squash Racquet,1,Average,Fleurette,16

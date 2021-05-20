@@ -1,0 +1,100 @@
+Equipment_ID,Name,Repair Status,Condition,Sport_ID,User_ID
+1,Badminton Racquet,1,Good,1,18
+2,Shuttlecock,1,Average,1,37
+3,Badminton Shoes,1,Average,1,60
+4,Badminton Net,1,Poor,1,75
+5,Tennis Racquet,1,Good,2,76
+6,Tennis Ball,1,Poor,2,79
+7,Basketball,1,Good,3,87
+8,Squash Racquet,1,Good,5,122
+9,Squash Ball,1,Average,5,159
+10,Swimsuit,1,Poor,6,164
+11,Goggles,1,Poor,6,174
+12,Bathing caps,1,Good,6,189
+13,Flotation devices,1,Good,6,223
+14,Kickboards,1,Average,6,241
+15,Pull buoys,1,Poor,6,251
+16,Fins,1,Poor,6,276
+17,Bat,1,Good,7,280
+18,Leather Ball,1,Good,7,303
+19,Cosco Ball,1,Good,7,311
+21,Keeper Glove,1,Good,7,316
+22,Keeper/Batsman Pads,1,Poor,7,324
+23,Helmet,1,Poor,7,347
+24,Stumps,1,Good,7,354
+25,Bails,1,Poor,7,360
+26,Football,1,Poor,8,365
+27,Shin Guards,1,Poor,8,371
+28,Cleats,1,Average,8,388
+29,Chess Pieces and Board,1,Good,10,395
+30,Volleyball,1,Poor,11,410
+31,Cue,1,Poor,12,421
+32,Billiards Ball,1,Poor,4,431
+33,Table Tennis Racquet,0,Good,4,438
+34,Table Tennis Ball,0,Poor,4,445
+35,Squash Ball,0,Average,5,452
+36,Swimsuit,0,Poor,6,482
+37,Goggles,0,Poor,6,494
+38,Bathing caps,0,Good,6,496
+39,Flotation devices,0,Good,6,497
+40,Kickboards,0,Average,6,498
+41,Badminton Racquet,0,Good,1,502
+42,Shuttlecock,0,Average,1,504
+43,Badminton Shoes,0,Average,1,517
+44,Badminton Net,0,Poor,1,521
+45,Tennis Racquet,0,Good,2,522
+46,Tennis Ball,0,Poor,2,524
+47,Keeper/Batsman Pads,0,Poor,7,528
+48,Helmet,0,Poor,7,536
+49,Stumps,0,Good,7,540
+50,Bails,0,Poor,7,551
+51,Football,0,Poor,8,556
+52,Shin Guards,0,Poor,8,564
+53,Cleats,0,Average,8,565
+54,Basketball,0,Good,3,572
+55,Squash Racquet,0,Good,5,596
+56,Squash Ball,0,Average,5,604
+57,Swimsuit,0,Poor,6,612
+58,Goggles,0,Poor,6,615
+59,Bathing caps,0,Good,6,640
+60,Flotation devices,0,Good,6,655
+61,Kickboards,0,Average,6,656
+62,Pull buoys,0,Poor,6,659
+63,Fins,0,Poor,6,668
+64,Bat,0,Good,7,669
+65,Leather Ball,0,Good,7,671
+66,Cosco Ball,0,Good,7,689
+67,Keeper Glove,0,Good,7,690
+68,Keeper/Batsman Pads,0,Poor,7,698
+69,Badminton Shoes,0,Average,1,715
+70,Badminton Net,0,Poor,1,721
+71,Tennis Racquet,0,Good,2,730
+72,Bails,0,Poor,7,732
+73,Football,0,Poor,8,737
+74,Shin Guards,0,Poor,8,745
+75,Cleats,0,Average,8,746
+76,Basketball,0,Good,3,764
+77,Squash Racquet,0,Good,5,773
+78,Squash Ball,0,Average,5,786
+79,Swimsuit,0,Poor,6,788
+80,Goggles,0,Poor,6,794
+81,Bathing caps,0,Good,6,801
+82,Flotation devices,0,Good,6,806
+83,Kickboards,0,Average,6,837
+84,Bathing caps,0,Good,6,848
+85,Flotation devices,0,Good,6,850
+86,Kickboards,0,Average,6,852
+87,Badminton Racquet,0,Good,1,864
+88,Shuttlecock,0,Average,1,879
+89,Badminton Shoes,0,Average,1,898
+90,Badminton Net,0,Poor,1,902
+91,Tennis Racquet,0,Good,2,912
+92,Tennis Ball,0,Poor,2,925
+93,Keeper/Batsman Pads,0,Poor,7,944
+94,Helmet,0,Poor,7,945
+95,Stumps,0,Good,7,947
+96,Bails,0,Poor,7,950
+97,Football,0,Poor,8,958
+98,Shin Guards,0,Poor,8,999
+99,Badminton Racquet,0,Good,1,54
+100,Shuttlecock,0,Average,1,307

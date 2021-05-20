@@ -1,0 +1,9 @@
+Order_ID,Type,Order_Status,Equipment_ID,Vendor_ID
+1,Repair,Pending,2,1
+2,Repair,Pending,7,13
+3,Repair,Pending,12,6
+4,Repair,Pending,18,1
+5,Repair,Pending,23,8
+6,Repair,Pending,30,11
+7,Repair,Pending,31,8
+8,Repair,Pending,40,9
